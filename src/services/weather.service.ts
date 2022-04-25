@@ -1,10 +1,7 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { IGetWeatherResponse, IWeatherParams } from '../models';
 
-interface IResponse {
-    data?: IGetWeatherResponse;
-    error?: AxiosError;
-}
+
 
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/onecall'
 const API_KEY = '88aab3d8f057b51b30e111d545b273f4'
@@ -16,7 +13,7 @@ const defaultParams = {
     units: 'metric',
 }
 
-export const getWeather = async (params: IWeatherParams): Promise<IResponse> => {
+export const getWeather = async (params: IWeatherParams): Promise<IGetWeatherResponse> => {
     const { lat, lon } = params;
     const { lang, part, apikey, units } = defaultParams;
 

@@ -1,14 +1,17 @@
+import { AxiosError } from "axios";
+
 export interface IWeatherParams {
     lat: number;
     lon: number;
 }
 
 export interface IGetWeatherResponse {
-    current: ICurrent;
-    daily: IDaily[];
+    current?: ICurrent;
+    daily?: IDaily[];
+    error?: AxiosError;
 }
 
-interface ICurrent {
+export interface ICurrent {
     dt: number;
     sunrise: number;
     sunset: number;
@@ -20,11 +23,12 @@ interface ICurrent {
     uvi: number;
     clouds: number;
     visibility: number;
+    wind_deg: number;
     wind_speed: number;
     weather: IWeather[];
 }
 
-interface IDaily {
+export interface IDaily {
     dt: number;
     sunrise: number;
     sunset: number;
@@ -34,17 +38,31 @@ interface IDaily {
     humidity: number;
     dew_point: number;
     uvi: number;
-    visibility: number;
+    visibility?: number;
     wind_speed: number;
     weather: IWeather[];
     pop: number;
+    moonrise: number;
+    moonset: number;
+    moon_phase: number;
+    wind_deg: number;
+    wind_gust: number;
+    clouds: number;
+    rain: number;
 }
 
 interface IDailyTemp {
     day: number;
+    max?: number;
+    min?: number;
+    night: number;
+    eve: number;
+    morn: number;
 }
 
 interface IWeather {
+    id: number;
+    main: string;
     description: string;
     icon: string;
 }
