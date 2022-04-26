@@ -48,14 +48,15 @@ function LocationSelector() {
     }
     setIsError(error);
     if (!error) {
-      
+
       handleGetWeather(location);
       setCity(location);
-    }else
-    setErrMsg('No se pudo acceder a la ubicación');
+    } else
+      setErrMsg('No se pudo acceder a la ubicación');
   }
 
-  const handleClick = () => {
+  const handleOnSubmit = (e: React.FormEvent<EventTarget>) => {
+    e.preventDefault();
     setIsLoading(true)
     const getLocationFetch = async () => getLocations({ query: textfield })
     getLocationFetch()
@@ -72,24 +73,25 @@ function LocationSelector() {
     <div>
       <Grid container justifyContent="center" alignItems="center" direction="column" >
 
-        <TextField
+        <form style={{width: "80%"}} onSubmit={handleOnSubmit}>
+          <TextField
 
-          sx={{ width: "80%", input: { textAlign: "center" }, marginBottom: "1rem", marginTop: "3rem" }}
-          hiddenLabel
-          placeholder="Ingrese una ciudad"
-          id="filled-hidden-label-small"
-          defaultValue={textfield}
-          variant="outlined"
-          onChange={handleChangeText}
-        />
-        <Button onClick={handleClick} sx={{ width: "80%", padding: "1em", marginBottom: "1rem" }} variant="contained" disabled={isLoading || !textfield.trim().length}>
+            sx={{ width: "100%", input: { textAlign: "center" }, marginBottom: "1rem", marginTop: "3rem" }}
+            hiddenLabel
+            placeholder="Ingrese una ciudad"
+            id="filled-hidden-label-small"
+            defaultValue={textfield}
+            variant="outlined"
+            onChange={handleChangeText}
+          />
+        </form>
+
+        <Button onClick={handleOnSubmit} sx={{ width: "80%", padding: "1em", marginBottom: "1rem" }} variant="contained" disabled={isLoading || !textfield.trim().length}>
           Buscar
         </Button>
         <Button onClick={handleGetGeoLocation} sx={{ width: "80%", padding: "1em" }} variant="contained" >
           Ubicación actual
         </Button>
-
-
       </Grid>
 
       <div>
@@ -99,9 +101,11 @@ function LocationSelector() {
             <Grid container spacing={3} justifyContent="center" alignItems="center" direction="column" >
               {results.length > 0 && <h2>Resultados:</h2>}
               {results.map((item: ILocations, index: number) => {
+                const state = item.state ? `, ${item.state}`: ''
+                const cityLongString = `${item.name}${state}, ${item.country}`
                 return <Grid item key={index} onClick={() =>
                   handleSelectCity(item)}>
-                  <Paper elevation={3} sx={{ paddingY: '1rem', paddingX: '2rem' }}>{item.name}, {item.state},{item.country}</Paper>
+                  <Paper elevation={3} sx={{ paddingY: '1rem', paddingX: '2rem' }}>{cityLongString}</Paper>
                 </Grid>
               })}
             </Grid>
@@ -112,8 +116,6 @@ function LocationSelector() {
           <p>{errMsg}</p>
         </Grid>}
       </div>
-
-
     </div>
 
   );
