@@ -1,12 +1,12 @@
-import { IGetWeatherResponse } from "../models"
+import { IGetWeatherResponse, ILocations } from "../models"
 import { IDataState } from "./models"
 
 
 type IDataAction =
     | { type: 'SET_WEATHER', payload: IGetWeatherResponse }
-    | { type: 'SET_CITY', payload: any }
-    | { type: 'SET_IS_LOADING', payload: any }
-    | { type: 'SET_IS_ERROR', payload: any }
+    | { type: 'SET_CITY', payload: ILocations | null }
+    | { type: 'SET_IS_LOADING', payload: boolean }
+    | { type: 'SET_IS_ERROR', payload: boolean }
 
 
 export const dataReducer = (state: IDataState, action: IDataAction) => {

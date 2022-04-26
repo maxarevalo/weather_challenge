@@ -9,8 +9,8 @@ export interface ILocations {
     name: string;
     lat: number;
     lon: number;
-    country: string;
-    state: string;
+    country?: string;
+    state?: string;
 }
 export interface IGetLocationsResponse {
     data?: ILocations[]

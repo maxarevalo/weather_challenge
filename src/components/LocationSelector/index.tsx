@@ -1,6 +1,7 @@
 import { Box, Button, CircularProgress, Grid, Paper, TextField } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { DataContext } from '../../context/dataContext';
+import useGeo from '../../hooks/useGeo';
 import { IGetLocationsResponse, IGetWeatherResponse, ILocations } from '../../models';
 import { getLocations, getWeather } from '../../services/weather.service';
 
@@ -12,6 +13,8 @@ function LocationSelector() {
   const { state, setCity, setWeather, setIsError, setIsLoading } = useContext(DataContext);
   const { isError, isLoading } = state;
   const [results, setResults] = useState<ILocations[]>([]);
+  const getLocation = useGeo();
+  const [errMsg, setErrMsg] = useState<string>('Por favor intente más tarde');
 
 
   const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +37,22 @@ function LocationSelector() {
   const handleSelectCity = (location: ILocations) => {
     handleGetWeather(location);
     setCity(location);
+  }
 
+  const handleGetGeoLocation = () => {
+    const { latitude, longitude, error } = getLocation;
+    const location: ILocations = {
+      lat: latitude,
+      lon: longitude,
+      name: 'Ubicación actual'
+    }
+    setIsError(error);
+    if (!error) {
+      
+      handleGetWeather(location);
+      setCity(location);
+    }else
+    setErrMsg('No se pudo acceder a la ubicación');
   }
 
   const handleClick = () => {
@@ -67,7 +85,7 @@ function LocationSelector() {
         <Button onClick={handleClick} sx={{ width: "80%", padding: "1em", marginBottom: "1rem" }} variant="contained" disabled={isLoading || !textfield.trim().length}>
           Buscar
         </Button>
-        <Button onClick={handleClick} sx={{ width: "80%", padding: "1em" }} variant="contained" >
+        <Button onClick={handleGetGeoLocation} sx={{ width: "80%", padding: "1em" }} variant="contained" >
           Ubicación actual
         </Button>
 
@@ -79,7 +97,7 @@ function LocationSelector() {
           ? <Grid container justifyContent="center" alignItems="center"><CircularProgress sx={{ paddingY: "5rem" }} /></Grid>
           : <Box sx={{ paddingY: '3rem' }}>
             <Grid container spacing={3} justifyContent="center" alignItems="center" direction="column" >
-              {results.length > 0 &&  <h2>Resultados:</h2>}
+              {results.length > 0 && <h2>Resultados:</h2>}
               {results.map((item: ILocations, index: number) => {
                 return <Grid item key={index} onClick={() =>
                   handleSelectCity(item)}>
@@ -91,7 +109,7 @@ function LocationSelector() {
         }
         {isError && <Grid container spacing={3} justifyContent="center" alignItems="center" direction="column" >
           <h2>Ha ocurrido un error</h2>
-          <p>Por favor intente más tarde</p>
+          <p>{errMsg}</p>
         </Grid>}
       </div>
 

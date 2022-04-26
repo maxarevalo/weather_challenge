@@ -10,14 +10,15 @@ import { DataContext } from '../../context/dataContext';
 
 const NavBar = () => {
 
-     const { setCity } = useContext(DataContext);
+     const { setCity, state } = useContext(DataContext);
+     const { city } = state;
 
     const handleCleanData = () => {
         setCity(null);
     };
 
     const title = 'CHALLENGE "WEATHER APP"'
-
+    
     return (
         <AppBar position="static">
             <Container maxWidth="xl">
@@ -26,29 +27,22 @@ const NavBar = () => {
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
                         {title}
                     </Typography>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-                    >
-                        {title}
-                    </Typography>
+                
 
-                    <Box sx={{ flexGrow: 1, justifyContent: 'end', display: { xs: 'none', md: 'flex' } }}>
+                    {city && <Box sx={{ flexGrow: 1, justifyContent: 'end', display: 'flex' }}>
 
                         <Button
+                        variant="contained"
                             onClick={handleCleanData}
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >
                             Inicio
                         </Button>
 
-                    </Box>
+                    </Box>}
 
 
                 </Toolbar>
