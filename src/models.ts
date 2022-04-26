@@ -5,6 +5,17 @@ export interface IWeatherParams {
     lon: number;
 }
 
+export interface ILocations {
+    name: string;
+    lat: number;
+    lon: number;
+    country: string;
+    state: string;
+}
+export interface IGetLocationsResponse {
+    data?: ILocations[]
+    error?: AxiosError;
+}
 export interface IGetWeatherResponse {
     current?: ICurrent;
     daily?: IDaily[];

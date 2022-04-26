@@ -1,36 +1,12 @@
 import { Box, Tabs, Tab } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import CurrentDayInfo from '../CurrentDayInfo';
 import DaysOfWeekInfo from '../DaysOfWeekInfo';
 import TabPanel from '../TabPanel';
 
-const current= {
-    "dt": 1650773570,
-    "sunrise": 1650710813,
-    "sunset": 1650754917,
-    "temp": 11.34,
-    "feels_like": 10.98,
-    "pressure": 1026,
-    "humidity": 94,
-    "dew_point": 10.41,
-    "uvi": 0,
-    "clouds": 75,
-    "visibility": 10000,
-    "wind_speed": 2.57,
-    "wind_deg": 260,
-    "weather": [
-        {
-            "id": 803,
-            "main": "Clouds",
-            "description": "muy nuboso",
-            "icon": "04n"
-        }
-    ]
-  }
-
 const WeatherInfo = () => {
 
-    const [value, setValue] = React.useState(1);
+    const [value, setValue] = React.useState(0);
 
 
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -53,10 +29,10 @@ const WeatherInfo = () => {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <CurrentDayInfo current={current}/>
+                <CurrentDayInfo />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <DaysOfWeekInfo/>
+                <DaysOfWeekInfo  />
             </TabPanel>
         </Box>
     )

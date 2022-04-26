@@ -27,6 +27,10 @@ const DayInfo = (props: IDayInfoProp) => {
 
     const { day, index } = props;
 
+    const min = Number(day.temp.min).toFixed(0)
+    const max = Number(day.temp.max).toFixed(0)
+    const rain = Math.round(day.rain || 0) 
+
     return (
         <Card sx={{ width: '95%', marginBottom: '10px' }}>
             <CardContentCustomPadding >
@@ -39,10 +43,10 @@ const DayInfo = (props: IDayInfoProp) => {
                         <img src={getIcon(day.weather[0].icon)} alt="weather" />
                     </Grid>
                     <Grid item xs={6} md={3} >
-                        <b>Prob. Lluvia:</b>{day.rain}%
+                        <b>Prob. Lluvia:</b>{rain }%
                     </Grid>
                     <Grid item xs={6} md={3} >
-                        {day.temp.min}ºC / {day.temp.max}ºC
+                        {min}ºC / {max}ºC
                     </Grid>
 
                 </Grid>
