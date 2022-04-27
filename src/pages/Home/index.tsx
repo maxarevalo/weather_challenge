@@ -1,5 +1,5 @@
-import { Button, TextField } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
+
+import  { useContext } from 'react';
 import LocationSelector from '../../components/LocationSelector';
 import WeatherInfo from '../../components/WeatherInfo';
 import { DataContext } from '../../context/dataContext';
