@@ -75,7 +75,7 @@ function LocationSelector() {
 
         <form style={{width: "80%"}} onSubmit={handleOnSubmit}>
           <TextField
-
+            data-testid="search-input"
             sx={{ width: "100%", input: { textAlign: "center" }, marginBottom: "1rem", marginTop: "3rem" }}
             hiddenLabel
             placeholder="Ingrese una ciudad"
@@ -86,10 +86,10 @@ function LocationSelector() {
           />
         </form>
 
-        <Button onClick={handleOnSubmit} sx={{ width: "80%", padding: "1em", marginBottom: "1rem" }} variant="contained" disabled={isLoading || !textfield.trim().length}>
+        <Button data-testid="search-button" onClick={handleOnSubmit} sx={{ width: "80%", padding: "1em", marginBottom: "1rem" }} variant="contained" disabled={isLoading || !textfield.trim().length}>
           Buscar
         </Button>
-        <Button onClick={handleGetGeoLocation} sx={{ width: "80%", padding: "1em" }} variant="contained" >
+        <Button data-testid="geo-location-button" onClick={handleGetGeoLocation} sx={{ width: "80%", padding: "1em" }} variant="contained" >
           Ubicación actual
         </Button>
       </Grid>

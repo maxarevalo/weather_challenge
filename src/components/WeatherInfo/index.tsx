@@ -21,7 +21,7 @@ const WeatherInfo = () => {
     }
 
     return (
-        <Box sx={{ width: '100%' }} >
+        <Box  data-testid='weather-info-box' sx={{ width: '100%' }} >
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="Tipo de vista" variant="fullWidth" indicatorColor="primary">
                     <Tab label="HOY" {...a11yProps(0)} />

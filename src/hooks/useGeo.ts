@@ -14,7 +14,7 @@ const useGeo = () => {
   });
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
+    navigator.geolocation?.getCurrentPosition(showPosition, showError);
   }, [coordinates.error]);
 
   const showPosition = (position: any) => {

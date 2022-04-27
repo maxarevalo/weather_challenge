@@ -59,7 +59,7 @@ export interface IDaily {
     wind_deg: number;
     wind_gust: number;
     clouds: number;
-    rain: number;
+    rain?: number;
 }
 
 interface IDailyTemp {

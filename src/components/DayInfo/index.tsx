@@ -29,10 +29,10 @@ const DayInfo = (props: IDayInfoProp) => {
 
     const min = Number(day.temp.min).toFixed(0)
     const max = Number(day.temp.max).toFixed(0)
-    const rain = Math.round(day.rain || 0) 
+    const rain = Math.round(day.rain || 0).toFixed(0) 
 
     return (
-        <Card sx={{ width: '95%', marginBottom: '10px' }}>
+        <Card data-testid="card-day" sx={{ width: '95%', marginBottom: '10px' }}>
             <CardContentCustomPadding >
                 <Grid
                     container alignItems="center" sx={{ textAlign: 'center' }}>

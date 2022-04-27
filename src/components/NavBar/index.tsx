@@ -27,6 +27,7 @@ const NavBar = () => {
                         variant="h6"
                         noWrap
                         component="div"
+                        data-testid="title"
                     >
                         {title}
                     </Typography>
@@ -34,7 +35,7 @@ const NavBar = () => {
 
                     {city && <Box sx={{ flexGrow: 1, justifyContent: 'end', display: 'flex' }}>
 
-                        <Button
+                        <Button data-testid="button"
                         variant="contained"
                             onClick={handleCleanData}
                             sx={{ my: 2, color: 'white', display: 'block' }}

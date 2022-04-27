@@ -16,7 +16,7 @@ const formatDate = (value: number | undefined) =>
 }
     
 
-const CurrentDayInfo = ( ) => {
+const CurrentDayInfo = () => {
 
     const {state} = useContext(DataContext);
     const { city, isLoading} = state;
@@ -32,19 +32,16 @@ const CurrentDayInfo = ( ) => {
             alignItems="center"
         >
             {!isLoading ? <Card sx={{ width: '85%', textAlign: 'center' }}>
-                <CardHeader
-
-                    title={<Typography variant="h3" >{city?.name}</Typography>}
-                />
-                <Typography variant="h6" >
+               <Typography component="p" variant="h3" >{city?.name}</Typography>
+                <Typography component="p" variant="h6" >
                 {current?.weather[0].description.toUpperCase()}
                 </Typography>
                 <img src={img} alt="weather" />
-                <Typography variant="h4" >
+                <Typography component="h4" variant="h4" >
                    { current?.temp + 'ºC'}
                 </Typography>
 
-                <CardContent>
+                <CardContent data-testid='card-content'>
                     <p><b>Sensación térmica:</b> {current?.feels_like} ºC</p>
                     <p><b>Humedad:</b> {current?.humidity} %</p>
                     <p><b>Viento:</b> {current?.wind_speed} m/s</p>
@@ -56,7 +53,7 @@ const CurrentDayInfo = ( ) => {
                 </CardContent>
         
 
-            </Card> : <CircularProgress sx={{ paddingY: "5rem" }} />}
+            </Card> : <CircularProgress data-testid='spinner' sx={{ paddingY: "5rem" }} />}
         </Grid>
     )
 }

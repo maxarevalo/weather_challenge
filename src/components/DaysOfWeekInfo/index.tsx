@@ -13,7 +13,7 @@ const DaysOfWeekInfo = () => {
 
     return (
         <>
-            <Typography variant="h4" align="center" sx={{ padding: '20px' }}>
+            <Typography variant="h4" component="h4" align="center" sx={{ padding: '20px' }}>
                 Próximos dias
             </Typography>
             <Grid container justifyContent="center" >
